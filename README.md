@@ -1,70 +1,77 @@
-# Task 1: Understanding Credit Risk
+# Task 2: Exploratory Data Analysis (EDA)
 
-## Project Overview
-This document outlines the objectives and deliverables for Task 1 of the AI Mastery Course focused on understanding the concept of credit risk for Bati Bank's buy-now-pay-later initiative.
+## Overview
+This task involves a thorough examination of the dataset to understand its structure, distributions, and relationships. The goal is to uncover insights that will guide subsequent steps in the machine learning pipeline.
 
-## Objective
-The primary goal is to gain a comprehensive understanding of credit risk, including its definitions, implications, and management strategies within the banking sector.
+## Objectives
 
-## Key Concepts
+- **Understand Data Structure:** Determine the number of rows, columns, and data types within the dataset.
+- **Summary Statistics:** Calculate central tendency, dispersion, and distribution shapes.
+- **Distribution of Features:** Visualize both numerical and categorical feature distributions.
+- **Correlation Analysis:** Identify relationships between numerical variables.
+- **Identify Missing Values:** Spot and strategize handling of missing data.
+- **Detect Outliers:** Use various plots to identify anomalies in the data.
 
-### Credit Scoring
-- **Definition:** A method to assess the creditworthiness of potential borrowers by assigning a numerical score based on their financial behavior.
-- **Purpose:** To predict the likelihood of default.
+## Data Overview
 
-### Default
-- **Definition:** When a borrower fails to repay a loan according to the agreed terms.
-- **Contextual Variation:** Definitions can vary but must comply with financial regulations like Basel II.
+- **Dataset:** Found in `./data/transactions.csv`
+- **Rows:** [Number of rows if known]
+- **Columns:** [Number of columns if known]
 
-### Basel II Capital Accord
-- **Overview:** A framework for banking supervision which emphasizes capital adequacy, supervisory review, and market discipline.
-- **Pillars:**
-  - Pillar 1: Minimum Capital Requirements
-  - Pillar 2: Supervisory Review Process
-  - Pillar 3: Market Discipline
+## Summary Statistics
 
-## Business Implications
+- **Central Tendency:** Measures like mean, median for numerical features.
+- **Dispersion:** Standard deviation, variance.
+- **Shape:** Skewness, kurtosis.
 
-### Risk Management
-- Enables banks to mitigate losses by identifying high-risk customers early.
+## Distribution Analysis
 
-### Customer Segmentation
-- Allows for tailored credit offerings based on assessed risk, enhancing customer satisfaction and profitability.
+### Numerical Features
+- **Histograms:** To show distribution shapes, skewness, and potential outliers.
+- **Q-Q Plots:** To check for normality.
 
-### Regulatory Compliance
-- Ensures that credit scoring practices are in line with international standards, reducing legal risks.
+### Categorical Features
+- **Bar Charts:** To visualize the frequency of categories.
 
-### Profitability
-- Helps in pricing credit products appropriately to balance risk and return.
+## Correlation Analysis
 
-## Learning Outcomes
+- **Heatmap:** To illustrate correlations between numerical variables.
 
-- **Conceptual Understanding:** Grasp the foundational concepts of credit risk.
-- **Regulatory Awareness:** Recognize the importance of regulatory frameworks like Basel II in credit practices.
-- **Strategic Application:** Apply theoretical knowledge to practical business scenarios, particularly in product development for credit services.
+## Missing Values
 
-## Task Deliverables
+- **Heatmap of Missing Data:** Visual representation of missing data distribution across features.
+- **Count of Missing Values:** Numerical summary of missing data.
 
-- **Report:** A detailed report or notebook documenting the study of credit risk concepts, regulatory frameworks, and their business impacts.
-- **Jupyter Notebooks:** Located in `./notebooks/`, these will include:
-  - Exploratory data analysis related to credit risk if applicable.
-  - Code examples or visualizations to illustrate concepts.
+## Outlier Detection
 
-## References
+- **Box Plots:** To identify outliers in numerical features.
 
-- Basel II Capital Accord - [Link to document]
-- Investopedia - [Credit Risk]
-- Corporate Finance Institute - [Credit Risk Management]
+## Insights and Decisions
+
+- **Data Quality:** Observations on data integrity, including skewness, outliers, and missing values.
+- **Feature Relationships:** Insights into how features correlate with each other.
+- **Next Steps:** Decisions on data preprocessing, feature engineering based on EDA findings.
+
+## Jupyter Notebook
+
+- **Location:** `./notebooks/02_exploratory_data_analysis.ipynb`
+- **Content:** All EDA steps are documented with code, visualizations, and commentary.
 
 ## How to Use
 
-1. **Navigate to Notebooks:** Go to the `./notebooks/` directory to find the Jupyter notebooks related to this task.
-2. **Run the Notebooks:** Use Jupyter Notebook or JupyterLab to open and run `01_understanding_credit_risk.ipynb`.
-3. **Review the Report:** Check the report section in this README or in a separate document for a comprehensive overview of credit risk understanding.
+1. **Open Notebook:** Navigate to `./notebooks/` and open `02_exploratory_data_analysis.ipynb` in Jupyter.
+2. **Run Cells:** Execute each cell to see the EDA in action or review the results already produced.
+3. **Interpret Results:** Use the insights from this notebook to inform your approach in the next tasks.
+
+## References
+
+- [Seaborn Documentation](https://seaborn.pydata.org/)
+- [Pandas Documentation](https://pandas.pydata.org/docs/)
+- [Matplotlib Documentation](https://matplotlib.org/stable/contents.html)
 
 ## Next Steps
 
-- Proceed to Task 2 for Exploratory Data Analysis to apply this understanding to real data.
-- Consider how this knowledge informs feature engineering and model building in subsequent tasks.
+- **Feature Engineering:** Based on EDA, engineer new features or transform existing ones.
+- **Model Building:** Use EDA findings to guide model selection and feature importance.
 
-This task sets the stage for all credit-related analysis in this project, providing a solid foundation for the technical work to follow.
+This task lays the groundwork for a data-driven approach to credit scoring model development. The insights gained here are pivotal for making informed decisions in the subsequent stages of our project.
