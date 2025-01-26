@@ -1,77 +1,26 @@
-# Task 2: Exploratory Data Analysis (EDA)
+# Task 4: Default Estimator and WoE Binning
 
-## Overview
-This task involves a thorough examination of the dataset to understand its structure, distributions, and relationships. The goal is to uncover insights that will guide subsequent steps in the machine learning pipeline.
+## Purpose
+The goal of this task is to create a system for classifying customers into high-risk and low-risk categories based on their transaction history, utilizing the RFMS (Recency, Frequency, Monetary, Score) framework. We also apply Weight of Evidence (WoE) binning to enhance feature predictive power for credit risk modeling.
 
 ## Objectives
 
-- **Understand Data Structure:** Determine the number of rows, columns, and data types within the dataset.
-- **Summary Statistics:** Calculate central tendency, dispersion, and distribution shapes.
-- **Distribution of Features:** Visualize both numerical and categorical feature distributions.
-- **Correlation Analysis:** Identify relationships between numerical variables.
-- **Identify Missing Values:** Spot and strategize handling of missing data.
-- **Detect Outliers:** Use various plots to identify anomalies in the data.
+- **Construct a Default Estimator:** Use RFMS components to classify customers as 'Good' or 'Bad' in terms of default risk.
+- **Visualize RFMS Space:** Identify natural boundaries for risk classification.
+- **Assign Risk Labels:** Based on RFMS scores, label users as high or low risk.
+- **Perform WoE Binning:** Transform features using WoE to improve model interpretability and performance.
 
-## Data Overview
+## RFMS Components
 
-- **Dataset:** Found in `./data/transactions.csv`
-- **Rows:** [Number of rows if known]
-- **Columns:** [Number of columns if known]
+### Calculation
+- **Recency:** Days since the last transaction.
+- **Frequency:** Number of transactions.
+- **Monetary:** Total amount spent.
+- **Score:** A composite score based on R, F, and M.
 
-## Summary Statistics
-
-- **Central Tendency:** Measures like mean, median for numerical features.
-- **Dispersion:** Standard deviation, variance.
-- **Shape:** Skewness, kurtosis.
-
-## Distribution Analysis
-
-### Numerical Features
-- **Histograms:** To show distribution shapes, skewness, and potential outliers.
-- **Q-Q Plots:** To check for normality.
-
-### Categorical Features
-- **Bar Charts:** To visualize the frequency of categories.
-
-## Correlation Analysis
-
-- **Heatmap:** To illustrate correlations between numerical variables.
-
-## Missing Values
-
-- **Heatmap of Missing Data:** Visual representation of missing data distribution across features.
-- **Count of Missing Values:** Numerical summary of missing data.
-
-## Outlier Detection
-
-- **Box Plots:** To identify outliers in numerical features.
-
-## Insights and Decisions
-
-- **Data Quality:** Observations on data integrity, including skewness, outliers, and missing values.
-- **Feature Relationships:** Insights into how features correlate with each other.
-- **Next Steps:** Decisions on data preprocessing, feature engineering based on EDA findings.
-
-## Jupyter Notebook
-
-- **Location:** `./notebooks/02_exploratory_data_analysis.ipynb`
-- **Content:** All EDA steps are documented with code, visualizations, and commentary.
-
-## How to Use
-
-1. **Open Notebook:** Navigate to `./notebooks/` and open `02_exploratory_data_analysis.ipynb` in Jupyter.
-2. **Run Cells:** Execute each cell to see the EDA in action or review the results already produced.
-3. **Interpret Results:** Use the insights from this notebook to inform your approach in the next tasks.
-
-## References
-
-- [Seaborn Documentation](https://seaborn.pydata.org/)
-- [Pandas Documentation](https://pandas.pydata.org/docs/)
-- [Matplotlib Documentation](https://matplotlib.org/stable/contents.html)
-
-## Next Steps
-
-- **Feature Engineering:** Based on EDA, engineer new features or transform existing ones.
-- **Model Building:** Use EDA findings to guide model selection and feature importance.
-
-This task lays the groundwork for a data-driven approach to credit scoring model development. The insights gained here are pivotal for making informed decisions in the subsequent stages of our project.
+```python
+# Example code for calculating RFMS components
+df['Recency'] = (max_date - df.groupby('AccountId')['TransactionDate'].transform('max')).dt.days
+df['Frequency'] = df.groupby('AccountId')['TransactionId'].transform('count')
+df['Monetary'] = df.groupby('AccountId')['Amount'].transform('sum')
+df['Score'] = df['Recency'] + df['Frequency'] + df['Monetary']  # Example of scoringw
