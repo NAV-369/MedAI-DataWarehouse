@@ -81,4 +81,15 @@ Scikit-learn Documentation (link_to_sklearn_docs)
 Hyperparameter Tuning (link_to_hyperparameter_tuning)
 
 This task establishes which models perform best in predicting credit risk, setting the stage for model deployment and continuous improvement.
+
+So RESULT:
+Comparison of Metrics:
+Model               Accuracy  Precision Recall    F1 Score  ROC AUC   
+----------------------------------------------------------------------
+Random Forest       0.9980    0.0000    0.0000    0.0000    0.9315    
+GBM                 0.9980    0.0000    0.0000    0.0000    0.9368    
+
+Best Model: GBM (Based on ROC AUC)
+GBM Metrics: {'Accuracy': 0.9980487124986933, 'Precision': 0.0, 'Recall': 0.0, 'F1 Score': 0.0, 'ROC AUC': np.float64(0.9368235694585065)}
+
 ```
