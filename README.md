@@ -1,26 +1,84 @@
-# Task 4: Default Estimator and WoE Binning
+# Task 5: Modelling
 
-## Purpose
-The goal of this task is to create a system for classifying customers into high-risk and low-risk categories based on their transaction history, utilizing the RFMS (Recency, Frequency, Monetary, Score) framework. We also apply Weight of Evidence (WoE) binning to enhance feature predictive power for credit risk modeling.
+## Overview
+This task focuses on selecting, training, tuning, and evaluating machine learning models for credit risk assessment. We aim to predict the likelihood of default by leveraging the features engineered in previous tasks.
 
 ## Objectives
 
-- **Construct a Default Estimator:** Use RFMS components to classify customers as 'Good' or 'Bad' in terms of default risk.
-- **Visualize RFMS Space:** Identify natural boundaries for risk classification.
-- **Assign Risk Labels:** Based on RFMS scores, label users as high or low risk.
-- **Perform WoE Binning:** Transform features using WoE to improve model interpretability and performance.
+- **Model Selection:** Choose and implement at least two models from Logistic Regression, Decision Trees, Random Forest, and Gradient Boosting Machines (GBM).
+- **Data Splitting:** Divide the dataset into training and testing sets to assess model performance on unseen data.
+- **Model Training:** Train selected models on the training data.
+- **Hyperparameter Tuning:** Optimize model performance through:
+  - **Grid Search:** Exhaustive search over specified parameter values.
+  - **Random Search:** Random sampling from a distribution of parameter values.
+- **Model Evaluation:** Measure model effectiveness using various metrics including:
+  - **Accuracy:** Proportion of correct predictions among the total number of cases.
+  - **Precision:** Ratio of true positive predictions to the total predicted positives.
+  - **Recall:** Ratio of true positive predictions to all actual positives.
+  - **F1 Score:** Harmonic mean of precision and recall, providing a balance between them.
+  - **ROC-AUC:** Measures the ability of the classifier to distinguish between classes.
 
-## RFMS Components
+## Implementation Details
 
-### Calculation
-- **Recency:** Days since the last transaction.
-- **Frequency:** Number of transactions.
-- **Monetary:** Total amount spent.
-- **Score:** A composite score based on R, F, and M.
+### **Data Preparation**
+- Ensure data is preprocessed (encoded, scaled, etc.) before splitting into training and test sets.
+
+### **Model Selection and Training**
 
 ```python
-# Example code for calculating RFMS components
-df['Recency'] = (max_date - df.groupby('AccountId')['TransactionDate'].transform('max')).dt.days
-df['Frequency'] = df.groupby('AccountId')['TransactionId'].transform('count')
-df['Monetary'] = df.groupby('AccountId')['Amount'].transform('sum')
-df['Score'] = df['Recency'] + df['Frequency'] + df['Monetary']  # Example of scoringw
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+models = {
+    'Random Forest': RandomForestClassifier(random_state=42),
+    'GBM': GradientBoostingClassifier(random_state=42)
+}
+
+Hyperparameter Tuning
+Grid Search Example (Random Forest)
+python
+rf_param_grid = {
+    'n_estimators': [100, 200, 300],
+    'max_depth': [None, 10, 20],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4],
+    'max_features': ['sqrt', 'log2']
+}
+rf_grid_search = GridSearchCV(RandomForestClassifier(random_state=42), rf_param_grid, cv=5, scoring='roc_auc', n_jobs=-1)
+rf_grid_search.fit(X_train, y_train)
+
+Random Search Example (Random Forest)
+python
+rf_param_dist = {
+    'n_estimators': [int(x) for x in np.linspace(start=200, stop=2000, num=10)],
+    'max_features': ['sqrt', 'log2'],
+    # ... other parameters
+}
+rf_random_search = RandomizedSearchCV(RandomForestClassifier(random_state=42), param_distributions=rf_param_dist, n_iter=100, cv=3, scoring='roc_auc', random_state=42, n_jobs=-1)
+rf_random_search.fit(X_train, y_train)
+
+Model Evaluation
+python
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+
+def evaluate_model(model, X_test, y_test):
+    # ... evaluation logic ...
+
+for name, model in models.items():
+    evaluate_model(model, X_test, y_test)
+
+How to Use
+Jupyter Notebook: Navigate to ./notebooks/05_modelling.ipynb to see or run the code for this task.
+Data: Ensure all features have been engineered and properly preprocessed before running model experiments.
+
+Next Steps
+Model Deployment: Prepare the best performing model for deployment into a production environment.
+Model Monitoring: Establish metrics and checks for model performance in real-world scenarios.
+
+References
+Scikit-learn Documentation (link_to_sklearn_docs)
+Hyperparameter Tuning (link_to_hyperparameter_tuning)
+
+This task establishes which models perform best in predicting credit risk, setting the stage for model deployment and continuous improvement.
+```
