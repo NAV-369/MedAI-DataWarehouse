@@ -1,156 +1,74 @@
-Here’s a professional and well-structured `README.md` for **Task-6**. You can customize it further based on your specific project details.
+# Bati Bank - AI-Driven Credit Scoring Model
 
----
+### Business Need
 
-# **Task-6: Machine Learning Model Deployment with Flask**
+You are an Analytics Engineer at Bati Bank, a leading financial service provider with over 10 years of experience. Bati Bank has partnered with an upcoming successful eCommerce company to provide a buy-now-pay-later service, enabling customers to purchase products on credit if they qualify. Your project is to create a Credit Scoring Model using data from the eCommerce platform. This model will estimate the likelihood of a borrower defaulting on a loan, which will help evaluate applicants for the buy-now-pay-later service.
 
-## **Overview**
-This project demonstrates the deployment of a machine learning model using **Flask**, a lightweight web framework for Python. The model is trained to perform a specific task (e.g., classification or regression) and is exposed via a REST API for making predictions. The API provides endpoints for health checks and predictions, making it easy to integrate with other applications.
+### Credit Scoring Process
 
----
+Credit scoring involves assigning a quantitative score to a potential borrower, assessing how likely they are to default in the future. The score is built using historical data on previous borrowers and their loan performance. This score can then be used to evaluate new applicants based on the same information.
 
-## **Project Structure**
-```
-task-6/
-├── app/
-│   ├── __init__.py
-│   ├── main.py              # Flask application and API endpoints
-│   ├── model/               # Directory for the trained model
-│   │   └── gbm_model.pkl    # Serialized Gradient Boosting Model
-├── notebooks/
-│   └── model_training.ipynb # Notebook for training and saving the model
-├── requirements.txt         # Python dependencies
-├── README.md                # Project documentation
-└── tests/                   # Unit tests for the API
-    └── test_api.py
-```
+### References:
+	•	Basel II Capital Accord (for loan procedures and default definition)
+	•	Credit Scoring Approaches
+	•	Credit Scoring Insights
 
----
+# Task1: Understanding Credit Risk
+	•	Focus: Understand the concept of credit risk and its relation to default prediction.
+	•	Key Resources:
+	•	Basel II Capital Accord
+	•	Alternative Credit Scoring
+	•	World Bank Credit Scoring Guidelines
 
-## **Requirements**
-To run this project, you need the following:
-- Python 3.8+
-- Flask
-- Scikit-learn
-- Joblib
-- NumPy
+# Task2: Exploratory Data Analysis (EDA)
+	•	Overview of Data:
+	•	Understand dataset structure: rows, columns, and data types.
+	•	Summary Statistics: Analyze central tendency, dispersion, and distribution.
+	•	Distribution of Features: Visualize numerical and categorical features.
+	•	Correlation Analysis: Assess relationships between numerical features.
+	•	Missing Values: Identify and plan imputation strategies.
+	•	Outlier Detection: Use box plots to identify anomalies.
 
-Install the dependencies using:
-```bash
-pip install -r requirements.txt
-```
+# Task3: Feature Engineering
+	•	Create Aggregate Features:
+	•	Examples: Total Transaction Amount, Average Transaction Amount, etc.
+	•	Extract Features:
+	•	Examples: Transaction Hour, Day, Month, Year.
+	•	Encode Categorical Variables:
+	•	Techniques: One-Hot Encoding, Label Encoding.
+	•	Handle Missing Values:
+	•	Strategies: Imputation or Removal.
+	•	Normalize/Standardize Numerical Features:
+	•	Normalize: Scale features to range [0,1].
+	•	Standardize: Scale to mean 0 and standard deviation 1.
+	•	Tools:
+	•	xverse
+	•	woe
+	•	Weight of Evidence (WOE) and Information Value (IV) explained.
 
----
+# Task4: Default Estimator and WoE Binning
+	•	Objective: Classify users as high or low risk (default).
+	•	Steps:
+	•	Visualize transactions in RFMS space.
+	•	Establish a boundary for classifying good and bad users.
+	•	Perform WoE binning for features using references.
+	•	Outcome: Create a default estimator to help in classification.
 
-## **How to Run the Application**
+# Task5: Modeling
+	•	Model Selection and Training:
+	•	Split data into training and testing sets.
+	•	Choose models (e.g., Logistic Regression, Decision Trees, Random Forest, GBM).
+	•	Train models on training data.
+	•	Hyperparameter Tuning:
+	•	Techniques: Grid Search, Random Search.
+	•	Model Evaluation:
+	•	Metrics: Accuracy, Precision, Recall, F1 Score, ROC-AUC.
 
-### **1. Clone the Repository**
-```bash
-git clone <repository-url>
-cd task-6
-```
+# Task6: Model Serving API Call
+	•	Create a REST API to serve the trained models for real-time predictions.
+	•	Steps:
+	•	Choose a framework (e.g., Flask, FastAPI, Django).
+	•	Load the trained model.
+	•	Define API endpoints to receive data and return predictions.
+	•	Deploy the API on a server or cloud platform.
 
-### **2. Install Dependencies**
-```bash
-pip install -r requirements.txt
-```
-
-### **3. Run the Flask Application**
-```bash
-python test/FlaskApi.py
-```
-
-The application will start running at `http://127.0.0.1:5003`.
-
----
-
-## **API Endpoints**
-
-### **1. Health Check**
-- **Endpoint:** `/health`
-- **Method:** `GET`
-- **Description:** Checks if the API is running and the model is loaded.
-- **Response:**
-  ```json
-  {
-    "status": "API is running and model is loaded!"
-  }
-  ```
-
-### **2. Make Predictions**
-- **Endpoint:** `/predict`
-- **Method:** `POST`
-- **Description:** Accepts input features and returns predictions.
-- **Request Body:**
-  ```json
-  {
-    "features": [feature1, feature2, ...]
-  }
-  ```
-- **Response:**
-  ```json
-  {
-    "prediction": [predicted_value]
-  }
-  ```
-
----
-
-## **Example Usage**
-
-### **Health Check**
-```bash
-curl http://127.0.0.1:50003/health
-```
-
-### **Prediction**
-```bash
-curl -X POST http://127.0.0.1:5003/predict \
--H "Content-Type: application/json" \
--d '{"features": [1.0, 2.0, 3.0, 4.0]}'
-```
-
----
-
-## **Model Training**
-The model used in this project was trained using a Gradient Boosting Classifier. The training process is documented in the `notebooks/Model_Serving_Api.ipynb` notebook. Key steps include:
-1. Data preprocessing
-2. Model training
-3. Model evaluation
-4. Saving the model using `joblib`
-
----
-
-## **Testing**
-Unit tests for the API are located in the `tests/` directory. Run the tests using:
-```bash
-python -m pytest tests/
-```
-
----
-
-## **Troubleshooting**
-
-### **1. Model Loading Issues**
-- Ensure the model file (`gbm_model.pkl`) 
-- Verify that the file path in `FlaskApi.py` is correct.
-
-### **2. Dependency Issues**
-- Ensure all dependencies are installed using `pip install -r requirements.txt`.
-- If you encounter version conflicts, consider using a virtual environment.
-
-### **3. API Errors**
-- Check the Flask logs for detailed error messages.
-- Ensure the input data format matches the expected schema.
-
----
-
-## **Contributing**
-Contributions are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
-
----
-
-## **License**
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
