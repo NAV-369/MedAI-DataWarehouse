@@ -1,95 +1,156 @@
-# Task 5: Modelling
+Here’s a professional and well-structured `README.md` for **Task-6**. You can customize it further based on your specific project details.
 
-## Overview
-This task focuses on selecting, training, tuning, and evaluating machine learning models for credit risk assessment. We aim to predict the likelihood of default by leveraging the features engineered in previous tasks.
+---
 
-## Objectives
+# **Task-6: Machine Learning Model Deployment with Flask**
 
-- **Model Selection:** Choose and implement at least two models from Logistic Regression, Decision Trees, Random Forest, and Gradient Boosting Machines (GBM).
-- **Data Splitting:** Divide the dataset into training and testing sets to assess model performance on unseen data.
-- **Model Training:** Train selected models on the training data.
-- **Hyperparameter Tuning:** Optimize model performance through:
-  - **Grid Search:** Exhaustive search over specified parameter values.
-  - **Random Search:** Random sampling from a distribution of parameter values.
-- **Model Evaluation:** Measure model effectiveness using various metrics including:
-  - **Accuracy:** Proportion of correct predictions among the total number of cases.
-  - **Precision:** Ratio of true positive predictions to the total predicted positives.
-  - **Recall:** Ratio of true positive predictions to all actual positives.
-  - **F1 Score:** Harmonic mean of precision and recall, providing a balance between them.
-  - **ROC-AUC:** Measures the ability of the classifier to distinguish between classes.
+## **Overview**
+This project demonstrates the deployment of a machine learning model using **Flask**, a lightweight web framework for Python. The model is trained to perform a specific task (e.g., classification or regression) and is exposed via a REST API for making predictions. The API provides endpoints for health checks and predictions, making it easy to integrate with other applications.
 
-## Implementation Details
+---
 
-### **Data Preparation**
-- Ensure data is preprocessed (encoded, scaled, etc.) before splitting into training and test sets.
-
-### **Model Selection and Training**
-
-```python
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-
-models = {
-    'Random Forest': RandomForestClassifier(random_state=42),
-    'GBM': GradientBoostingClassifier(random_state=42)
-}
-
-Hyperparameter Tuning
-Grid Search Example (Random Forest)
-python
-rf_param_grid = {
-    'n_estimators': [100, 200, 300],
-    'max_depth': [None, 10, 20],
-    'min_samples_split': [2, 5, 10],
-    'min_samples_leaf': [1, 2, 4],
-    'max_features': ['sqrt', 'log2']
-}
-rf_grid_search = GridSearchCV(RandomForestClassifier(random_state=42), rf_param_grid, cv=5, scoring='roc_auc', n_jobs=-1)
-rf_grid_search.fit(X_train, y_train)
-
-Random Search Example (Random Forest)
-python
-rf_param_dist = {
-    'n_estimators': [int(x) for x in np.linspace(start=200, stop=2000, num=10)],
-    'max_features': ['sqrt', 'log2'],
-    # ... other parameters
-}
-rf_random_search = RandomizedSearchCV(RandomForestClassifier(random_state=42), param_distributions=rf_param_dist, n_iter=100, cv=3, scoring='roc_auc', random_state=42, n_jobs=-1)
-rf_random_search.fit(X_train, y_train)
-
-Model Evaluation
-python
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
-
-def evaluate_model(model, X_test, y_test):
-    # ... evaluation logic ...
-
-for name, model in models.items():
-    evaluate_model(model, X_test, y_test)
-
-How to Use
-Jupyter Notebook: Navigate to ./notebooks/05_modelling.ipynb to see or run the code for this task.
-Data: Ensure all features have been engineered and properly preprocessed before running model experiments.
-
-Next Steps
-Model Deployment: Prepare the best performing model for deployment into a production environment.
-Model Monitoring: Establish metrics and checks for model performance in real-world scenarios.
-
-References
-Scikit-learn Documentation (link_to_sklearn_docs)
-Hyperparameter Tuning (link_to_hyperparameter_tuning)
-
-This task establishes which models perform best in predicting credit risk, setting the stage for model deployment and continuous improvement.
-
-So RESULT:
-Comparison of Metrics:
-Model               Accuracy  Precision Recall    F1 Score  ROC AUC   
-----------------------------------------------------------------------
-Random Forest       0.9980    0.0000    0.0000    0.0000    0.9315    
-GBM                 0.9980    0.0000    0.0000    0.0000    0.9368    
-
-Best Model: GBM (Based on ROC AUC)
-GBM Metrics: {'Accuracy': 0.9980487124986933, 'Precision': 0.0, 'Recall': 0.0, 'F1 Score': 0.0, 'ROC AUC': np.float64(0.9368235694585065)}
-
+## **Project Structure**
 ```
+task-6/
+├── app/
+│   ├── __init__.py
+│   ├── main.py              # Flask application and API endpoints
+│   ├── model/               # Directory for the trained model
+│   │   └── gbm_model.pkl    # Serialized Gradient Boosting Model
+├── notebooks/
+│   └── model_training.ipynb # Notebook for training and saving the model
+├── requirements.txt         # Python dependencies
+├── README.md                # Project documentation
+└── tests/                   # Unit tests for the API
+    └── test_api.py
+```
+
+---
+
+## **Requirements**
+To run this project, you need the following:
+- Python 3.8+
+- Flask
+- Scikit-learn
+- Joblib
+- NumPy
+
+Install the dependencies using:
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## **How to Run the Application**
+
+### **1. Clone the Repository**
+```bash
+git clone <repository-url>
+cd task-6
+```
+
+### **2. Install Dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+### **3. Run the Flask Application**
+```bash
+python test/FlaskApi.py
+```
+
+The application will start running at `http://127.0.0.1:5003`.
+
+---
+
+## **API Endpoints**
+
+### **1. Health Check**
+- **Endpoint:** `/health`
+- **Method:** `GET`
+- **Description:** Checks if the API is running and the model is loaded.
+- **Response:**
+  ```json
+  {
+    "status": "API is running and model is loaded!"
+  }
+  ```
+
+### **2. Make Predictions**
+- **Endpoint:** `/predict`
+- **Method:** `POST`
+- **Description:** Accepts input features and returns predictions.
+- **Request Body:**
+  ```json
+  {
+    "features": [feature1, feature2, ...]
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "prediction": [predicted_value]
+  }
+  ```
+
+---
+
+## **Example Usage**
+
+### **Health Check**
+```bash
+curl http://127.0.0.1:50003/health
+```
+
+### **Prediction**
+```bash
+curl -X POST http://127.0.0.1:5003/predict \
+-H "Content-Type: application/json" \
+-d '{"features": [1.0, 2.0, 3.0, 4.0]}'
+```
+
+---
+
+## **Model Training**
+The model used in this project was trained using a Gradient Boosting Classifier. The training process is documented in the `notebooks/Model_Serving_Api.ipynb` notebook. Key steps include:
+1. Data preprocessing
+2. Model training
+3. Model evaluation
+4. Saving the model using `joblib`
+
+---
+
+## **Testing**
+Unit tests for the API are located in the `tests/` directory. Run the tests using:
+```bash
+python -m pytest tests/
+```
+
+---
+
+## **Troubleshooting**
+
+### **1. Model Loading Issues**
+- Ensure the model file (`gbm_model.pkl`) 
+- Verify that the file path in `FlaskApi.py` is correct.
+
+### **2. Dependency Issues**
+- Ensure all dependencies are installed using `pip install -r requirements.txt`.
+- If you encounter version conflicts, consider using a virtual environment.
+
+### **3. API Errors**
+- Check the Flask logs for detailed error messages.
+- Ensure the input data format matches the expected schema.
+
+---
+
+## **Contributing**
+Contributions are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
+
+---
+
+## **License**
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
