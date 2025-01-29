@@ -1,7 +1,2 @@
+telethon
 pandas
-numpy
-matplotlib
-seaborn
-scikit-learn
-statsmodels
-tqdm
