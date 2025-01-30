@@ -1,70 +1,59 @@
-# Task-1: Data Scraping and Collection Pipeline for Ethiopian Medical Businesses
+# Task 2 - Data Cleaning and Transformation
 
-This project involves scraping data from various Telegram channels related to Ethiopian medical businesses, including doctors, pharmacies, and cosmetic services, to gather insights or for further analysis.
+## Data Cleaning
 
-## Setup
+### Removing Duplicates
+- Identify and remove any duplicate entries in the dataset to ensure data integrity.
 
-### Python Environment
-- **Python Version**: Use Python 3.7 or higher for compatibility and performance.
-- **Dependencies**: 
-  - Install the Telethon library, which is used for interacting with the Telegram API:
-    ```
-    pip install telethon
-    ```
+### Handling Missing Values
+- Decide on strategies for dealing with missing data, such as imputation, deletion, or flagging for further investigation.
 
-### Authentication
-- **API Credentials**: Obtain your `api_id` and `api_hash` from the Telegram Developer Portal at [my.telegram.org](https://my.telegram.org/). These are necessary for authenticating your script with Telegram's servers.
+### Standardizing Formats
+- Ensure that all data is in a consistent format, particularly for dates, times, and categorical variables.
 
-## Scraping Script
+### Data Validation
+- Validate data against expected formats and ranges to catch anomalies or errors.
 
-### Basic Structure
-- **Initialization**: Set up your script to connect to Telegram using your API credentials and phone number.
-- **Channel Selection**: Target specific channels known to be relevant to Ethiopian medical businesses:
-  - DoctorsET
-  - Chemed
-  - lobelia4cosmetics
-  - yetenaweg
-  - EAHCI
-- **Data Retrieval**: Fetch the last 500 messages from each channel. Here's a pseudo-structure:
-    ```python
-    from telethon.sync import TelegramClient
-    from telethon.tl.functions.messages import GetHistoryRequest
+### Storing Cleaned Data
+- After cleaning, save the data in an appropriate format or database for further processing.
 
-    api_id = 'YOUR_API_ID'
-    api_hash = 'YOUR_API_HASH'
-    phone = '+YOUR_PHONE_NUMBER'
+#### Database Storage
+- Use a database system to store cleaned data efficiently, allowing for easier querying and transformation.
 
-    with TelegramClient(phone, api_id, api_hash) as client:
-        client.start()
-        for channel in ['DoctorsET', 'Chemed', 'lobelia4cosmetics', 'yetenaweg', 'EAHCI']:
-            try:
-                messages = client(GetHistoryRequest(peer=channel, limit=500))
-                # Process messages here
-            except Exception as e:
-                print(f"Error with {channel}: {e}")
-    ```
+## DBT for Data Transformation
 
-## Data Storage
+### Setting Up DBT
+- **Install DBT**: Install the Data Build Tool for managing data transformations:
+  pip install dbt
 
-### Initial Storage
-- **Temporary Storage**: Use local files in CSV or JSON format to store raw data temporarily for further processing or analysis.
+- **Initialize DBT Project**:
+  dbt init my_project
 
-## Monitoring & Logging
+### Defining Models
+- Create DBT models for data transformation. DBT models are SQL files that define transformations on your data.
+
+- **Run DBT Models**: 
+  dbt run
+
+### Testing and Documentation
+- Use DBT’s testing and documentation features to ensure data quality and provide context for the transformations.
+
+- **Run Tests**:
+  ```
+  dbt test
+  ```
+
+- **Generate Documentation**:
+  ```
+  dbt docs generate
+  ```
+
+- **Serve Documentation**:
+  ```
+  dbt docs serve
+  ```
+
+## Monitoring and Logging
 
 ### Logging
-- **Implementation**: Add logging to your script to help monitor execution, track errors, and manage data flow:
-    ```python
-    import logging
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-    ```
-
-## Image Scraping
-
-### For Images
-- **Media Handling**: Extract images from messages where media is present. Here's how you might structure this:
-    ```python
-    from telethon.tl.types import MessageMediaPhoto
-    for message in messages:
-        if isinstance(message.media, MessageMediaPhoto):
-            # Download or process images here
-    ```
+- Implement logging to track the scraping process, capture errors, and monitor progress.
