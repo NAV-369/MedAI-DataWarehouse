@@ -1,2 +1,50 @@
 2025-01-29 06:41:52,685 - ERROR - Error occurred while scraping: name 'channel_name' is not defined
 2025-01-29 06:41:52,686 - INFO - Scraping process concluded
+2025-01-29 08:36:37,320 - WARNING - Server closed the connection: [Errno 60] Operation timed out
+2025-01-29 08:36:37,324 - INFO - Connection closed while receiving data: [Errno 60] Operation timed out
+2025-01-29 08:36:37,324 - INFO - Closing current connection to begin reconnect...
+2025-01-29 08:36:37,326 - INFO - Connecting to 149.154.167.91:443/TcpFull...
+2025-01-29 08:36:37,332 - INFO - <class 'TimeoutError'> during disconnect: [Errno 60] Operation timed out
+2025-01-29 08:36:37,333 - WARNING - Attempt 1 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:38,335 - WARNING - Attempt 2 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:39,338 - WARNING - Attempt 3 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:40,342 - WARNING - Attempt 4 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:41,345 - WARNING - Attempt 5 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:42,348 - WARNING - Attempt 6 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:43,349 - INFO - Failed reconnection attempt 1 with ConnectionError
+2025-01-29 08:36:44,351 - INFO - Connecting to 149.154.167.91:443/TcpFull...
+2025-01-29 08:36:44,354 - WARNING - Attempt 1 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:45,357 - WARNING - Attempt 2 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:46,361 - WARNING - Attempt 3 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:47,364 - WARNING - Attempt 4 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:48,368 - WARNING - Attempt 5 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:49,371 - WARNING - Attempt 6 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:50,372 - INFO - Failed reconnection attempt 2 with ConnectionError
+2025-01-29 08:36:51,373 - INFO - Connecting to 149.154.167.91:443/TcpFull...
+2025-01-29 08:36:51,375 - WARNING - Attempt 1 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:52,379 - WARNING - Attempt 2 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:53,386 - WARNING - Attempt 3 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:54,390 - WARNING - Attempt 4 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:55,393 - WARNING - Attempt 5 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:56,397 - WARNING - Attempt 6 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:57,399 - INFO - Failed reconnection attempt 3 with ConnectionError
+2025-01-29 08:36:58,401 - INFO - Connecting to 149.154.167.91:443/TcpFull...
+2025-01-29 08:36:58,403 - WARNING - Attempt 1 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:36:59,407 - WARNING - Attempt 2 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:37:00,414 - WARNING - Attempt 3 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:37:01,416 - WARNING - Attempt 4 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:37:02,420 - WARNING - Attempt 5 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:37:03,424 - WARNING - Attempt 6 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:37:04,425 - INFO - Failed reconnection attempt 4 with ConnectionError
+2025-01-29 08:37:05,428 - INFO - Connecting to 149.154.167.91:443/TcpFull...
+2025-01-29 08:37:05,430 - WARNING - Attempt 1 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:37:06,433 - WARNING - Attempt 2 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:37:07,437 - WARNING - Attempt 3 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:37:08,440 - WARNING - Attempt 4 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:37:09,444 - WARNING - Attempt 5 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:37:10,448 - WARNING - Attempt 6 at connecting failed: OSError: [Errno 51] Network is unreachable
+2025-01-29 08:37:11,449 - INFO - Failed reconnection attempt 5 with ConnectionError
+2025-01-29 08:37:12,451 - ERROR - Automatic reconnection failed 5 time(s)
+2025-01-29 08:37:12,453 - INFO - Disconnecting from 149.154.167.91:443/TcpFull...
+2025-01-29 08:37:12,453 - INFO - Disconnection from 149.154.167.91:443/TcpFull complete!
+2025-01-29 08:37:12,454 - INFO - Cannot get difference since the network is down: ConnectionError: Connection to Telegram failed 5 time(s)
