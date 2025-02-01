@@ -1,59 +1,91 @@
-# Task 2 - Data Cleaning and Transformation
+# Task 3 - Object Detection Using YOLO
 
-## Data Cleaning
+## Overview
+In this task, we will use YOLO (You Only Look Once), a popular object detection model, to detect objects in images. We will process images collected from a Telegram channel, extract relevant data (bounding box coordinates, confidence scores, and class labels), and store the detection results in a database.
 
-### Removing Duplicates
-- Identify and remove any duplicate entries in the dataset to ensure data integrity.
+## Setting Up the Environment
 
-### Handling Missing Values
-- Decide on strategies for dealing with missing data, such as imputation, deletion, or flagging for further investigation.
+Ensure you have the necessary dependencies installed for YOLO and its required libraries. You can use either the PyTorch-based YOLO model or the TensorFlow-based YOLO model. Below are the installation steps for both:
 
-### Standardizing Formats
-- Ensure that all data is in a consistent format, particularly for dates, times, and categorical variables.
+### Install Dependencies:
+1. **Install OpenCV (for image processing)**:
+    ```bash
+    pip install opencv-python
+    ```
 
-### Data Validation
-- Validate data against expected formats and ranges to catch anomalies or errors.
+2. **Install PyTorch and torchvision (for PyTorch-based YOLO)**:
+    ```bash
+    pip install torch torchvision
+    ```
 
-### Storing Cleaned Data
-- After cleaning, save the data in an appropriate format or database for further processing.
+3. **Install TensorFlow (for TensorFlow-based YOLO)**:
+    ```bash
+    pip install tensorflow
+    ```
 
-#### Database Storage
-- Use a database system to store cleaned data efficiently, allowing for easier querying and transformation.
+4. **Clone the YOLOv5 repository** (PyTorch-based):
+    ```bash
+    git clone https://github.com/ultralytics/yolov5.git
+    cd yolov5
+    pip install -r requirements.txt
+    ```
 
-## DBT for Data Transformation
+### Install Additional Required Libraries:
+1. **Pandas** (for handling detection results):
+    ```bash
+    pip install pandas
+    ```
 
-### Setting Up DBT
-- **Install DBT**: Install the Data Build Tool for managing data transformations:
-  pip install dbt
+2. **SQLite** (for storing detection data):
+    ```bash
+    pip install sqlite3
+    ```
 
-- **Initialize DBT Project**:
-  dbt init my_project
+## Downloading the YOLO Model
 
-### Defining Models
-- Create DBT models for data transformation. DBT models are SQL files that define transformations on your data.
+1. Clone the YOLOv5 repository:
+    ```bash
+    git clone https://github.com/ultralytics/yolov5.git
+    cd yolov5
+    pip install -r requirements.txt
+    ```
 
-- **Run DBT Models**: 
-  dbt run
+2. Download the pre-trained YOLO model from the repository. This model will be used to detect objects in images.
 
-### Testing and Documentation
-- Use DBT’s testing and documentation features to ensure data quality and provide context for the transformations.
+## Preparing the Data
 
-- **Run Tests**:
-  ```
-  dbt test
-  ```
+1. **Collect images from the Chemed Telegram Channel**: 
+    - Visit the [Chemed Telegram Channel](https://t.me/lobelia4cosmetics) to gather images for object detection.
 
-- **Generate Documentation**:
-  ```
-  dbt docs generate
-  ```
+2. **Store the images**: Ensure the images are stored in a directory that can be accessed by your script. Set the input directory path in the script accordingly.
 
-- **Serve Documentation**:
-  ```
-  dbt docs serve
-  ```
+## Processing the Detection Results
 
-## Monitoring and Logging
+1. **Run Object Detection with YOLO**: Use the pre-trained YOLO model to detect objects in the collected images.
+2. **Extract Data**: From the detection results, extract bounding box coordinates, confidence scores, and class labels for each detected object.
+3. **Save Detection Results**: Save the extracted data (image path, label, confidence, bounding box coordinates) to an SQLite database.
 
-### Logging
-- Implement logging to track the scraping process, capture errors, and monitor progress.
+### Sample Detection Results:
+For each image, the following data will be stored in the database:
+- `image_path`: Path to the image file
+- `label`: The class label of the detected object
+- `confidence`: The confidence score of the detection
+- `xmin, ymin, xmax, ymax`: Coordinates of the bounding box
+- `timestamp`: Timestamp of when the detection was performed
+
+## Storing Detection Data in Database
+
+The detection results will be stored in an SQLite database. The database will have a table `detections` with the following structure:
+
+```sql
+CREATE TABLE IF NOT EXISTS detections (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    image_path TEXT,
+    label TEXT,
+    confidence REAL,
+    xmin REAL,
+    ymin REAL,
+    xmax REAL,
+    ymax REAL,
+    timestamp TEXT
+);
