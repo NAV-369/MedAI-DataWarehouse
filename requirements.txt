@@ -1,2 +1,8 @@
 telethon
 pandas
+opencv-python
+torch
+torchvision
+tensorflow
+matplotlib
+sqlite3
